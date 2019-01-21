@@ -1,0 +1,144 @@
+#include<string>
+#include <iostream>
+using namespace std;
+class Person {
+public:
+
+	int Id;
+	string fName;
+	string LName;
+	string grp;
+
+	Person() {
+	}
+	Person(int pno, string fname, string lname, string group) {
+		this->Id = pno;
+		this->fName = fname;
+		this->LName = lname;
+		this->grp = group;
+	}
+	void acceptPerson() {
+		cout << "enter Person Id";
+		cin >> Id;
+		cout << "enter First Name";
+		cin >> fName;
+		cout << "enter Last Name";
+		cin >> LName;
+		cout << "enter group";
+		cin >> grp;
+	}
+	void display() {
+		cout << Id << "\t" << fName << "\t" << LName << "\t" << grp << endl;
+	}
+};
+
+class Ug :public Person {
+public:
+	void adding_details() {
+		cout << "Enter the  Person Id";
+		cin >> Id;
+		cout << "Enter the First Name";
+		cin >> fName;
+		cout << "Enter the Last Name";
+		cin >> LName;
+		cout << "Enter the group";
+		cin >> grp;
+	}
+};
+
+class Sport {
+
+};
+
+class Pg :public Ug, Sport {
+
+};
+
+
+
+int main()
+{
+
+	Pg obj[5];
+	
+	int num, k = 0;
+	int id;
+	string f1, f2, f3;
+	do {
+		cout << "choose " << endl << "1:Enter the details" << endl << "2:Display details" << endl << "3:Search the details" << endl << "4:Update details" << endl << "5: Delete" << endl;
+		
+		cout << "Choose the option : "; 
+		cin >> num;
+		
+		switch (num)
+		{
+		case 1:cout << "--------Enter the details--------- " << endl;
+
+			obj[k].acceptPerson();
+			k++;
+			break;
+		case 2:cout << "Display details : " << endl;
+			for (int j = 0; j < k; j++) {
+				obj[j].display();
+			}
+			break;
+		case 3:cout << "search the details : " << endl;
+			cout << "Enter id to search : " << endl;
+			cin >> id;
+			for (int i = 0; i < k; k++) {
+				if (obj[i].Id == id) {
+					obj[i].display();
+				}
+				else {
+					cout << "ID not found";
+				}
+				break;
+			}
+			break;
+		case 4:cout << "update details" << endl;
+			cout << "Enter the ID for updating : ";
+			cin >> id;
+			for (int i = 0; i < k; i++) {
+				if (obj[i].Id == id) {
+					obj[i].display();
+					cout << "Enter the FirstName : ";
+					cin >> f1;
+					cout << "Enter Last Name : ";
+					cin >> f2;
+					cout << "Enter the Group : ";
+					cin >> f3;
+					obj[i].fName = f1;
+					obj[i].LName = f2;
+					obj[i].grp = f3;
+
+					cout << "-------updated values-------" << endl;
+					obj[i].display();
+				}
+			}
+
+			break;
+		case 5:cout << "Delete " << endl;
+			cin >> id;
+			for (int i = 0; i < k; i++)
+			{
+				if (obj[i].Id == id)
+				{
+					for (int j = i; j < (k - 1); j++)
+					{
+						obj[j] = obj[j + 1];
+					}
+					//count++;
+					break;
+				}
+			}
+			k--;
+			cout << "ID deleted " << endl;
+			break;
+		default:
+			break;
+		}
+
+	} while (num < 6);
+
+	return 0;
+}
